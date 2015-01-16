@@ -16,7 +16,7 @@ public interface BackgroundProducer {
 
     /**
      * Returns the background by the given width and height.
-     * @param width width in pixels.
+     * @param width  width in pixels.
      * @param height height in pixels.
      * @return see description.
      */

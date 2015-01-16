@@ -25,7 +25,7 @@ import net.miron.captcha.text.renderer.DefaultWordRenderer;
 
 /**
  * A builder for generating a CAPTCHA image/answer pair.
- * 
+ * <p/>
  * <p>
  * Example for generating a new CAPTCHA:
  * </p>
@@ -78,7 +78,7 @@ public final class Captcha implements Serializable {
 
         /**
          * Add a background using the given {@link BackgroundProducer}.
-         * 
+         *
          * @param bgProd the instance of {@link BackgroundProducer}.
          */
         public Builder addBackground(BackgroundProducer bgProd) {
@@ -100,7 +100,7 @@ public final class Captcha implements Serializable {
         /**
          * Generate the answer to the CAPTCHA using the given
          * {@link TextProducer}.
-         * 
+         *
          * @param txtProd the instance of {@link TextProducer}.
          */
         public Builder addText(TextProducer txtProd) {
@@ -112,7 +112,7 @@ public final class Captcha implements Serializable {
          * {@link TextProducer}, and render it to the image using the given
          * {@link WordRenderer}.
          *
-         * @param txtProd the instance of {@link TextProducer}.
+         * @param txtProd   the instance of {@link TextProducer}.
          * @param wRenderer the instance of {@link WordRenderer}.
          */
         public Builder addText(TextProducer txtProd, WordRenderer wRenderer) {
@@ -130,7 +130,7 @@ public final class Captcha implements Serializable {
 
         /**
          * Add noise using the given {@link NoiseProducer}.
-         * 
+         *
          * @param nProd the instance of {@link NoiseProducer}.
          */
         public Builder addNoise(NoiseProducer nProd) {
@@ -147,7 +147,7 @@ public final class Captcha implements Serializable {
 
         /**
          * Gimp the image using the given {@link net.miron.captcha.renderer.Renderer}.
-         * 
+         *
          * @param renderer the instance of {@link net.miron.captcha.renderer.Renderer}.
          */
         public Builder gimp(Renderer renderer) {
@@ -167,7 +167,7 @@ public final class Captcha implements Serializable {
         /**
          * Build the CAPTCHA. This method should always be called, and should always
          * be called last.
-         * 
+         *
          * @return The constructed CAPTCHA.
          */
         public Captcha build() {
@@ -196,17 +196,17 @@ public final class Captcha implements Serializable {
 
             return new Captcha(this);
         }
-        
+
         private void writeObject(ObjectOutputStream out) throws IOException {
             out.writeObject(answer);
             out.writeObject(timeStamp);
             ImageIO.write(img, "png", ImageIO.createImageOutputStream(out));
         }
 
-        private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-            answer = (String) in.readObject();
-            timeStamp = (Date) in.readObject();
-            img = ImageIO.read(ImageIO.createImageInputStream(in));
+        private void readObject(ObjectInputStream in ) throws IOException, ClassNotFoundException {
+            answer = (String) in .readObject();
+            timeStamp = (Date) in .readObject();
+            img = ImageIO.read(ImageIO.createImageInputStream( in ));
         }
     }
 

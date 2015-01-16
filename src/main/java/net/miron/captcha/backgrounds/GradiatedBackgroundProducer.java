@@ -16,11 +16,11 @@ public class GradiatedBackgroundProducer implements BackgroundProducer {
 
     private final Color fromColor;
     private final Color toColor;
-    
+
     public GradiatedBackgroundProducer() {
         this(Color.DARK_GRAY, Color.WHITE);
     }
-    
+
     public GradiatedBackgroundProducer(Color from, Color to) {
         fromColor = from;
         toColor = to;

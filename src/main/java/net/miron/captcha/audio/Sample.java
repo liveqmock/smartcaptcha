@@ -1,6 +1,8 @@
 package net.miron.captcha.audio;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.sound.sampled.*;
 
@@ -15,7 +17,7 @@ import javax.sound.sampled.*;
  * <li>Signed: true</li>
  * <li>Big Endian: false</li>
  * </ul>
- * 
+ * <p/>
  * <p>
  * Data files in other formats will cause an
  * <code>IllegalArgumentException</code> to be thrown.
@@ -23,12 +25,9 @@ import javax.sound.sampled.*;
  */
 public class Sample {
 
-    public static final AudioFormat SC_AUDIO_FORMAT = new AudioFormat(
-            16000, // sample rate
-            16, // sample size in bits
-            1, // channels
-            true, // signed?
-            false); // big endian?;
+    private static final Logger LOG = Logger.getLogger(Sample.class.getName());
+
+    public static final AudioFormat SC_AUDIO_FORMAT = new AudioFormat(16000, 16, 1, true, false);
 
     private final AudioInputStream audioInputStream;
 
@@ -41,7 +40,7 @@ public class Sample {
         try {
             audioInputStream = AudioSystem.getAudioInputStream(is);
         } catch (UnsupportedAudioFileException | IOException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
 
         checkFormat(audioInputStream.getFormat());
@@ -57,7 +56,7 @@ public class Sample {
 
     /**
      * Return the number of samples of all channels
-     * 
+     *
      * @return The number of samples for all channels
      */
     public long getSampleCount() {
@@ -72,7 +71,7 @@ public class Sample {
         try {
             getInterleavedSamples(0, getSampleCount(), samples);
         } catch (IllegalArgumentException | IOException e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, "Could not get interleaved samples: ", e);
         }
 
         return samples;
@@ -83,15 +82,9 @@ public class Sample {
      * <code>begin</code> (included) to sample index <code>end</code> (excluded)
      * and copy them into <code>samples</code>. <code>end</code> must not exceed
      * <code>getSampleCount()</code>, and the number of samples must not be so
-     * large that the associated byte array cannot be allocated
-     * 
-     * @param begin
-     * @param end
-     * @param samples
-     * @throws IOException
-     * @throws IllegalArgumentException
+     * large that the associated byte array cannot be allocated.
      */
-    public double[] getInterleavedSamples(long begin, long end, double[] samples) throws IOException, IllegalArgumentException {
+    public double[] getInterleavedSamples(long begin, long end, double[] samples) throws IOException {
         long nbSamples = end - begin;
         long nbBytes = nbSamples * (getFormat().getSampleSizeInBits() / 8) * getFormat().getChannels();
         if (nbBytes > Integer.MAX_VALUE) {
@@ -109,11 +102,7 @@ public class Sample {
 
     /**
      * Extract samples of a particular channel from interleavedSamples and copy
-     * them into channelSamples
-     * 
-     * @param channel
-     * @param interleavedSamples
-     * @param channelSamples
+     * them into channelSamples.
      */
     public void getChannelSamples(int channel, double[] interleavedSamples, double[] channelSamples) {
         int nbChannels = getFormat().getChannels();
@@ -124,11 +113,7 @@ public class Sample {
 
     /**
      * Convenience method. Extract left and right channels for common stereo
-     * files. leftSamples and rightSamples must be of size getSampleCount()
-     * 
-     * @param leftSamples
-     * @param rightSamples
-     * @throws IOException
+     * files. leftSamples and rightSamples must be of size getSampleCount().
      */
     public void getStereoSamples(double[] leftSamples, double[] rightSamples)
             throws IOException {
@@ -142,12 +127,12 @@ public class Sample {
     }
 
     /**
-     * Decodes bytes of audioBytes into audioSamples
+     * Decodes bytes of audioBytes into audioSamples.
      */
     public void decodeBytes(byte[] audioBytes, double[] audioSamples) {
         int sampleSizeInBytes = getFormat().getSampleSizeInBits() / 8;
         int[] sampleBytes = new int[sampleSizeInBytes];
-        int k = 0; // index in audioBytes
+        int k = 0;
         for (int i = 0; i < audioSamples.length; i++) {
             // collect sample byte in big-endian order
             if (getFormat().isBigEndian()) {
@@ -165,8 +150,9 @@ public class Sample {
             int ival = 0;
             for (int j = 0; j < sampleSizeInBytes; j++) {
                 ival += sampleBytes[j];
-                if (j < sampleSizeInBytes - 1)
+                if (j < sampleSizeInBytes - 1) {
                     ival <<= 8;
+                }
             }
             // decode value
             double ratio = Math.pow(2., getFormat().getSampleSizeInBits() - 1);
@@ -177,7 +163,8 @@ public class Sample {
 
     /**
      * Return the interleaved samples as a <code>byte[]</code>.
-     * @return The interleaved samples
+     *
+     * @return The interleaved samples.
      */
     public final byte[] asByteArray() {
         return asByteArray(getSampleCount(), getInterleavedSamples());
@@ -188,14 +175,11 @@ public class Sample {
      * used by {@link AudioInputStream}. Typically this will be used with
      * a {@link Sample} that has been modified from its original.
      *
-     * @see <a href="http://en.wiktionary.org/wiki/yak_shaving">Yak Shaving</a>
-     *
-     * @return A byte[] representing a sample
+     * @return A byte[] representing a sample.
      */
     public static byte[] asByteArray(long sampleCount, double[] sample) {
-        int b_len = (int) sampleCount
-                * (SC_AUDIO_FORMAT.getSampleSizeInBits() / 8);
-        byte[] buffer = new byte[b_len];
+        int bufferLength = (int) sampleCount * (SC_AUDIO_FORMAT.getSampleSizeInBits() / 8);
+        byte[] buffer = new byte[bufferLength];
 
         int in;
         for (int i = 0; i < sample.length; i++) {

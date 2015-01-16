@@ -10,10 +10,13 @@ import javax.sound.sampled.AudioInputStream;
 /**
  * Helper class for operating on {@link Sample}.
  */
-public class Mixer {
+public final class MixerUtil {
+
+    private MixerUtil() {
+    }
 
     public static Sample append(List<Sample> samples) {
-        if (samples.size() == 0) {
+        if (samples.isEmpty()) {
             return buildSample(0, new double[0]);
         }
 
@@ -23,22 +26,22 @@ public class Mixer {
         double[] first = samples.get(0).getInterleavedSamples();
         sampleCount += samples.get(0).getSampleCount();
 
-        double[][] samples_ary = new double[samples.size() - 1][];
-        for (int i = 0; i < samples_ary.length; i++) {
-            samples_ary[i] = samples.get(i + 1).getInterleavedSamples();
+        double[][] samplesArray = new double[samples.size() - 1][];
+        for (int i = 0; i < samplesArray.length; i++) {
+            samplesArray[i] = samples.get(i + 1).getInterleavedSamples();
             sampleCount += samples.get(i + 1).getSampleCount();
         }
 
-        double[] appended = concatAll(first, samples_ary);
+        double[] appended = concatAll(first, samplesArray);
 
         return buildSample(sampleCount, appended);
     }
 
     public static Sample mix(Sample sample1, double volAdj1, Sample sample2, double volAdj2) {
-        double[] s1_ary = sample1.getInterleavedSamples();
-        double[] s2_ary = sample2.getInterleavedSamples();
+        double[] samples1 = sample1.getInterleavedSamples();
+        double[] samples2 = sample2.getInterleavedSamples();
 
-        double[] mixed = mix(s1_ary, volAdj1, s2_ary, volAdj2);
+        double[] mixed = mix(samples1, volAdj1, samples2, volAdj2);
 
         return buildSample(sample1.getSampleCount(), mixed);
     }

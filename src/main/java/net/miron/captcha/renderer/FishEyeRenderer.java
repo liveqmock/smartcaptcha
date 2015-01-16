@@ -9,22 +9,22 @@ import java.awt.image.BufferedImage;
  */
 public class FishEyeRenderer implements Renderer {
 
-	private final Color hColor;
-	private final Color vColor;
-	
-	public FishEyeRenderer() {
-		this(Color.BLACK, Color.BLACK);
-	}
-	
-	public FishEyeRenderer(Color hColor, Color vColor) {
-		this.hColor = hColor;
-		this.vColor = vColor;
-	}
+    private final Color hColor;
+    private final Color vColor;
+
+    public FishEyeRenderer() {
+        this(Color.BLACK, Color.BLACK);
+    }
+
+    public FishEyeRenderer(Color hColor, Color vColor) {
+        this.hColor = hColor;
+        this.vColor = vColor;
+    }
 
     /**
      * {@inheritDoc} See class description.
      */
-	@Override
+    @Override
     public void gimp(BufferedImage image) {
         int height = image.getHeight();
         int width = image.getWidth();
@@ -51,7 +51,7 @@ public class FishEyeRenderer implements Renderer {
 
         // Create a pixel array of the original image.
         // we need this later to do the operations on..
-        int pix[] = new int[height * width];
+        int[] pix = new int[height * width];
         int j = 0;
 
         for (int j1 = 0; j1 < width; j1++) {

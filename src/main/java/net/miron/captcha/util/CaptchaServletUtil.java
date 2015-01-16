@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
@@ -14,18 +16,24 @@ import net.miron.captcha.audio.Sample;
 
 public final class CaptchaServletUtil {
 
+    private static final Logger LOG = Logger.getLogger(CaptchaServletUtil.class.getName());
+    private static final int AUDIO_STREAM_SIZE = 1024;
+
     public static final String CAPTCHA_ATTRIBUTE = "CAPTCHA";
+
+    private CaptchaServletUtil() {
+    }
 
     public static void writeImage(HttpServletResponse response, BufferedImage bi) {
         response.setHeader("Cache-Control", "private,no-cache,no-store");
-        response.setContentType("image/png"); // PNGs allow for transparency.
-                                              // JPGs do not.
+        // PNGs allow for transparency. JPGs does not.
+        response.setContentType("image/png");
         try {
             OutputStream os = response.getOutputStream();
             ImageIO.write(bi, "png", os);
             os.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, "Could not write image to response: ", e);
         }
     }
 
@@ -34,8 +42,7 @@ public final class CaptchaServletUtil {
         response.setContentType("audio/wav");
 
         try {
-            // Convert to BAOS so we can set the content-length header
-            ByteArrayOutputStream baos = new ByteArrayOutputStream(1024);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream(AUDIO_STREAM_SIZE);
             AudioSystem.write(sample.getAudioInputStream(), AudioFileFormat.Type.WAVE, baos);
             response.setContentLength(baos.size());
 
@@ -44,7 +51,7 @@ public final class CaptchaServletUtil {
             os.flush();
             os.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, "Could not write audio to response: ", e);
         }
     }
 }

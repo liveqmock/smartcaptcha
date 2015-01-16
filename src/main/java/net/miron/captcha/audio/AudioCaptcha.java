@@ -14,11 +14,11 @@ import net.miron.captcha.text.producer.TextProducer;
 
 /**
  * A builder for generating a CAPTCHA audio/answer pair.
- *
+ * <p/>
  * <p>
  * Example for generating a new CAPTCHA:
  * </p>
- * 
+ * <p/>
  * <pre>
  * AudioCaptcha ac = new AudioCaptcha.Builder()
  *   .addAnswer()
@@ -93,7 +93,7 @@ public final class AudioCaptcha {
             VoiceProducer vProd;
             List<Sample> samples = new ArrayList<>();
             Sample sample;
-            for (char c: answerArray) {
+            for (char c : answerArray) {
                 // Create Sample for this character from one of the
                 // VoiceProducers
                 vProd = voiceProds.get(RAND.nextInt(voiceProds.size()));
@@ -103,14 +103,13 @@ public final class AudioCaptcha {
 
             // 3. Add noise, if any, and return the result
             if (noiseProds.isEmpty()) {
-                NoiseProducer nProd = noiseProds.get(RAND.nextInt(noiseProds
-                        .size()));
+                NoiseProducer nProd = noiseProds.get(RAND.nextInt(noiseProds.size()));
                 challenge = nProd.addNoise(samples);
 
                 return new AudioCaptcha(this);
             }
 
-            challenge = Mixer.append(samples);
+            challenge = MixerUtil.append(samples);
 
             return new AudioCaptcha(this);
         }

@@ -46,20 +46,20 @@ public class ImageCaptchaServlet extends HttpServlet implements SingleThreadMode
 
     @Override
     public void init() throws ServletException {
-    	if (getInitParameter("captcha-height") != null) {
-    		height = Integer.valueOf(getInitParameter("captcha-height"));
-    	}
-    	
-    	if (getInitParameter("captcha-width") != null) {
-    		width = Integer.valueOf(getInitParameter("captcha-width"));
-    	}
+        if (getInitParameter("captcha-height") != null) {
+            height = Integer.valueOf(getInitParameter("captcha-height"));
+        }
+
+        if (getInitParameter("captcha-width") != null) {
+            width = Integer.valueOf(getInitParameter("captcha-width"));
+        }
     }
-    
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ColoredEdgesWordRenderer wordRenderer = new ColoredEdgesWordRenderer(COLORS, FONTS);
         Captcha.Builder builder = new Captcha.Builder(width, height).gimp().addNoise().addBackground(new GradiatedBackgroundProducer());
-        String answer = (String)req.getSession().getAttribute(CAPTCHA_ATTRIBUTE);
+        String answer = (String) req.getSession().getAttribute(CAPTCHA_ATTRIBUTE);
         if (answer != null) {
             builder.addText(new DefaultTextProducer(answer), wordRenderer);
         } else {

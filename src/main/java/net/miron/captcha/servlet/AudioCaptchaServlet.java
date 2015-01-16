@@ -24,7 +24,7 @@ public class AudioCaptchaServlet extends HttpServlet implements SingleThreadMode
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AudioCaptcha.Builder builder = new AudioCaptcha.Builder().addNoise();
-        String answer = (String)req.getSession().getAttribute(CAPTCHA_ATTRIBUTE);
+        String answer = (String) req.getSession().getAttribute(CAPTCHA_ATTRIBUTE);
         if (answer != null) {
             builder.addAnswer(new DefaultTextProducer(answer));
         } else {

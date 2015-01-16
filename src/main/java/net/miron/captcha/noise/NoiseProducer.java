@@ -9,6 +9,7 @@ public interface NoiseProducer {
 
     /**
      * Adds noise to the specified image.
+     *
      * @param image the instance of {@link java.awt.image.BufferedImage}
      */
     public void makeNoise(BufferedImage image);

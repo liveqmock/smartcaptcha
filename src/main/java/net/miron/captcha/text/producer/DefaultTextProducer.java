@@ -9,9 +9,9 @@ public class DefaultTextProducer implements TextProducer {
 
     private static final Random RANDOM = new Random();
     private static final int DEFAULT_LENGTH = 5;
-    private static final char[] DEFAULT_CHARS = new char[] { 'a', 'b', 'c', 'd',
+    private static final char[] DEFAULT_CHARS = new char[]{'a', 'b', 'c', 'd',
             'e', 'f', 'g', 'h', 'k', 'm', 'n', 'p', 'r', 'w', 'x', 'y',
-            '2', '3', '4', '5', '6', '7', '8', };
+            '2', '3', '4', '5', '6', '7', '8',};
 
     private final String text;
 
@@ -30,17 +30,17 @@ public class DefaultTextProducer implements TextProducer {
     public DefaultTextProducer(String text) {
         this.text = text;
     }
-    
+
     @Override
     public String getText() {
         return text;
     }
 
     private String generateText(int length, char[] dictionary) {
-        String text = "";
+        String txt = "";
         for (int i = 0; i < length; i++) {
-            text += dictionary[RANDOM.nextInt(DEFAULT_LENGTH)];
+            txt += dictionary[RANDOM.nextInt(DEFAULT_LENGTH)];
         }
-        return text;
+        return txt;
     }
 }
