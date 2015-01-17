@@ -1,4 +1,4 @@
-package net.miron.captcha.text.renderer;
+package net.miron.captcha.image.renderer;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -18,6 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Implementation of {@link net.miron.captcha.image.renderer.WordRenderer}.
+ * A word with colored edges and adjustable stroke width.
+ */
 public class ColoredEdgesWordRenderer implements WordRenderer {
 
     private static final Random RAND = new SecureRandom();
@@ -38,14 +42,28 @@ public class ColoredEdgesWordRenderer implements WordRenderer {
         DEFAULT_COLORS.add(Color.BLACK);
     }
 
+    /**
+     * Creates a {@link ColoredEdgesWordRenderer} with default color (black), font (Arial) and stroke width (1).
+     */
     public ColoredEdgesWordRenderer() {
         this(DEFAULT_COLORS, DEFAULT_FONTS, DEFAULT_STROKE_WIDTH);
     }
 
+    /**
+     * Creates a {@link ColoredEdgesWordRenderer} with specified colors and fonts, and default stroke width (1).
+     * @param colors list of {@link java.awt.Color}.
+     * @param fonts list of {@link java.awt.Font}.
+     */
     public ColoredEdgesWordRenderer(List<Color> colors, List<Font> fonts) {
         this(colors, fonts, DEFAULT_STROKE_WIDTH);
     }
 
+    /**
+     * Creates a {@link ColoredEdgesWordRenderer} with specified colors, fonts and stroke width.
+     * @param colors list of {@link java.awt.Color}.
+     * @param fonts list of {@link java.awt.Font}.
+     * @param strokeWidth stroke width.
+     */
     public ColoredEdgesWordRenderer(List<Color> colors, List<Font> fonts, float strokeWidth) {
         this.colors = colors != null ? colors : DEFAULT_COLORS;
         this.fonts = fonts != null ? fonts : DEFAULT_FONTS;

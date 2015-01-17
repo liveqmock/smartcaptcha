@@ -1,10 +1,10 @@
-package net.miron.captcha.audio.noise;
+package net.miron.captcha.audio.producer;
 
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
-import net.miron.captcha.audio.MixerUtil;
+import net.miron.captcha.util.MixerUtil;
 import net.miron.captcha.audio.Sample;
 import net.miron.captcha.util.FileUtil;
 
@@ -30,17 +30,21 @@ public class RandomNoiseProducer implements NoiseProducer {
 
     private final String[] noiseFiles;
 
+    /**
+     * Creates a {@link RandomNoiseProducer} from default set of noises.
+     */
     public RandomNoiseProducer() {
         this(DEFAULT_NOISES);
     }
 
+    /**
+     * Creates a {@link RandomNoiseProducer} from one of the given <code>noiseFiles</code>.
+     * @param noiseFiles array of paths to files.
+     */
     public RandomNoiseProducer(String[] noiseFiles) {
-        this.noiseFiles = noiseFiles;
+        this.noiseFiles = noiseFiles.clone();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Sample addNoise(List<Sample> samples) {
         Sample appended = MixerUtil.append(samples);

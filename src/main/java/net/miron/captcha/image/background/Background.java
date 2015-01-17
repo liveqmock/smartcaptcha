@@ -1,12 +1,13 @@
-package net.miron.captcha.backgrounds;
+package net.miron.captcha.image.background;
 
 import java.awt.image.BufferedImage;
 
 /**
  * Base interface for background.
  */
-public interface BackgroundProducer {
+public interface Background {
 
+    //TODO miron: add default implementation of method.
     /**
      * Add the background to the given image.
      * @param image The image onto which the background will be rendered.

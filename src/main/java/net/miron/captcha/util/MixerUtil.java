@@ -1,4 +1,6 @@
-package net.miron.captcha.audio;
+package net.miron.captcha.util;
+
+import net.miron.captcha.audio.Sample;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -8,13 +10,18 @@ import java.util.List;
 import javax.sound.sampled.AudioInputStream;
 
 /**
- * Helper class for operating on {@link Sample}.
+ * Helper class for operating with {@link net.miron.captcha.audio.Sample}.
  */
 public final class MixerUtil {
 
     private MixerUtil() {
     }
 
+    /**
+     * Glues samples together.
+     * @param samples list of {@link net.miron.captcha.audio.Sample}.
+     * @return appended sample.
+     */
     public static Sample append(List<Sample> samples) {
         if (samples.isEmpty()) {
             return buildSample(0, new double[0]);
@@ -37,6 +44,14 @@ public final class MixerUtil {
         return buildSample(sampleCount, appended);
     }
 
+    /**
+     * Mixes two specified samples.
+     * @param sample1 the first sample.
+     * @param volAdj1 the volume of first sample.
+     * @param sample2 the second sample.
+     * @param volAdj2 the volume of second sample.
+     * @return mixed sample.
+     */
     public static Sample mix(Sample sample1, double volAdj1, Sample sample2, double volAdj2) {
         double[] samples1 = sample1.getInterleavedSamples();
         double[] samples2 = sample2.getInterleavedSamples();
@@ -71,14 +86,14 @@ public final class MixerUtil {
         return sample1;
     }
 
+    private static Sample buildSample(long sampleCount, double[] sample) {
+        AudioInputStream ais = buildStream(sampleCount, sample);
+        return new Sample(ais);
+    }
+
     private static AudioInputStream buildStream(long sampleCount, double[] sample) {
         byte[] buffer = Sample.asByteArray(sampleCount, sample);
         InputStream bais = new ByteArrayInputStream(buffer);
         return new AudioInputStream(bais, Sample.SC_AUDIO_FORMAT, sampleCount);
-    }
-
-    private static Sample buildSample(long sampleCount, double[] sample) {
-        AudioInputStream ais = buildStream(sampleCount, sample);
-        return new Sample(ais);
     }
 }

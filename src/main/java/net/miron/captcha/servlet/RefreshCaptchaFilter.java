@@ -7,7 +7,7 @@ import java.io.IOException;
 import static net.miron.captcha.util.CaptchaServletUtil.CAPTCHA_ATTRIBUTE;
 
 /**
- * Created by Evgeny Mironenko on 16.01.2015.
+ * Removes the captcha attribute from session, thereby resets captcha.
  */
 public class RefreshCaptchaFilter implements Filter {
 

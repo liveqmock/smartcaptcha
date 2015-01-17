@@ -31,6 +31,10 @@ public class Sample {
 
     private final AudioInputStream audioInputStream;
 
+    /**
+     * Creates a {@link Sample} with defined input stream.
+     * @param is input stream.
+     */
     public Sample(InputStream is) {
         if (is instanceof AudioInputStream) {
             audioInputStream = (AudioInputStream) is;
@@ -46,18 +50,25 @@ public class Sample {
         checkFormat(audioInputStream.getFormat());
     }
 
+    /**
+     * Returns audio stream.
+     * @return see description.
+     */
     public AudioInputStream getAudioInputStream() {
         return audioInputStream;
     }
 
+    /**
+     * Returns the current format audio.
+     * @return see description.
+     */
     public AudioFormat getFormat() {
         return audioInputStream.getFormat();
     }
 
     /**
-     * Return the number of samples of all channels
-     *
-     * @return The number of samples for all channels
+     * Return the number of samples of all channels.
+     * @return see description.
      */
     public long getSampleCount() {
         long total = (audioInputStream.getFrameLength()
@@ -66,6 +77,10 @@ public class Sample {
         return total / getFormat().getChannels();
     }
 
+    /**
+     * Returns the array of interleaved samples.
+     * @return see description.
+     */
     public double[] getInterleavedSamples() {
         double[] samples = new double[(int) getSampleCount()];
         try {
@@ -163,7 +178,6 @@ public class Sample {
 
     /**
      * Return the interleaved samples as a <code>byte[]</code>.
-     *
      * @return The interleaved samples.
      */
     public final byte[] asByteArray() {
@@ -174,7 +188,6 @@ public class Sample {
      * Helper method to convert a double[] to a byte[] in a format that can be
      * used by {@link AudioInputStream}. Typically this will be used with
      * a {@link Sample} that has been modified from its original.
-     *
      * @return A byte[] representing a sample.
      */
     public static byte[] asByteArray(long sampleCount, double[] sample) {
@@ -199,10 +212,8 @@ public class Sample {
 
     private static void checkFormat(AudioFormat af) {
         if (!af.matches(SC_AUDIO_FORMAT)) {
-            throw new IllegalArgumentException(
-                    "Unsupported audio format.\nReceived: " + af.toString()
-                            + "\nExpected: " + SC_AUDIO_FORMAT);
-
+            throw new IllegalArgumentException("Unsupported audio format.\nReceived: " + af.toString()
+                    + "\nExpected: " + SC_AUDIO_FORMAT);
         }
     }
 }

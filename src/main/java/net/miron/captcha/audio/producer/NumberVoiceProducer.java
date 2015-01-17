@@ -10,14 +10,13 @@ import net.miron.captcha.util.FileUtil;
 
 /**
  * <p>
- * {@link VoiceProducer} which generates a vocalization for a given number,
- * randomly selecting from a list of voices. The default voices are located in
- * the jar in the <code>sounds/en/numbers</code> directory, and have filenames
- * with a format of <i>num</i>-<i>voice</i>.wav, e.g.:
+ * Generates a vocalization for a given number, randomly selecting from a list of voices.
+ * The default voices are located in the jar in the <code>sounds/en/numbers</code> directory,
+ * and have filenames with a format of <i>num</i>-<i>voice</i>.wav, e.g.:
  * <code>sounds/en/numbers/1-alex.wav</code>.
  * </p>
  */
-public class RandomNumberVoiceProducer implements VoiceProducer {
+public class NumberVoiceProducer implements VoiceProducer {
 
     private static final Random RAND = new SecureRandom();
     private static final String[] DEFAULT_VOICES = {"alex", "bruce", "fred", "ralph", "kathy", "vicki", "victoria"};
@@ -44,12 +43,15 @@ public class RandomNumberVoiceProducer implements VoiceProducer {
 
     private final Map<Integer, String[]> voices;
 
-    public RandomNumberVoiceProducer() {
+    /**
+     * Creates a {@link NumberVoiceProducer} for the default set of voices.
+     */
+    public NumberVoiceProducer() {
         this(DEFAULT_VOICES_MAP);
     }
 
     /**
-     * Creates a <code>RandomNumberVoiceProducer</code> for the given <code>voices</code>.
+     * Creates a {@link NumberVoiceProducer} for the given <code>voices</code>.
      * Conceptually the map must look like the following:
      * <p/>
      * <pre>
@@ -59,13 +61,10 @@ public class RandomNumberVoiceProducer implements VoiceProducer {
      *
      * @param voices a map of numbers to their corresponding filenames.
      */
-    public RandomNumberVoiceProducer(Map<Integer, String[]> voices) {
+    public NumberVoiceProducer(Map<Integer, String[]> voices) {
         this.voices = voices;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public final Sample getVocalization(char num) {
         if (!Character.isDigit(num)) {

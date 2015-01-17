@@ -14,6 +14,9 @@ import javax.sound.sampled.AudioSystem;
 
 import net.miron.captcha.audio.Sample;
 
+/**
+ * Helper class for operating with {@link javax.servlet.http.HttpServletResponse} and image/audio resources.
+ */
 public final class CaptchaServletUtil {
 
     private static final Logger LOG = Logger.getLogger(CaptchaServletUtil.class.getName());
@@ -24,19 +27,29 @@ public final class CaptchaServletUtil {
     private CaptchaServletUtil() {
     }
 
-    public static void writeImage(HttpServletResponse response, BufferedImage bi) {
+    /**
+     * Writes image to the response.
+     * @param response current response.
+     * @param image determined image.
+     */
+    public static void writeImage(HttpServletResponse response, BufferedImage image) {
         response.setHeader("Cache-Control", "private,no-cache,no-store");
         // PNGs allow for transparency. JPGs does not.
         response.setContentType("image/png");
         try {
             OutputStream os = response.getOutputStream();
-            ImageIO.write(bi, "png", os);
+            ImageIO.write(image, "png", os);
             os.close();
         } catch (IOException e) {
             LOG.log(Level.SEVERE, "Could not write image to response: ", e);
         }
     }
 
+    /**
+     * Writes audio to the response.
+     * @param response current response.
+     * @param sample determined audio.
+     */
     public static void writeAudio(HttpServletResponse response, Sample sample) {
         response.setHeader("Cache-Control", "private,no-cache,no-store");
         response.setContentType("audio/wav");

@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.miron.captcha.Captcha;
-import net.miron.captcha.backgrounds.GradiatedBackgroundProducer;
-import net.miron.captcha.text.producer.DefaultTextProducer;
-import net.miron.captcha.text.producer.NumbersAnswerProducer;
-import net.miron.captcha.text.renderer.ColoredEdgesWordRenderer;
+import net.miron.captcha.image.Captcha;
+import net.miron.captcha.image.background.GradiatedBackground;
+import net.miron.captcha.image.producer.DefaultTextProducer;
+import net.miron.captcha.image.producer.NumbersAnswerProducer;
+import net.miron.captcha.image.renderer.ColoredEdgesWordRenderer;
 import net.miron.captcha.util.CaptchaServletUtil;
 
 import static net.miron.captcha.util.CaptchaServletUtil.CAPTCHA_ATTRIBUTE;
@@ -31,10 +31,10 @@ public class ImageCaptchaServlet extends HttpServlet implements SingleThreadMode
 
     private static final List<Color> COLORS = new ArrayList<>();
     private static final List<Font> FONTS = new ArrayList<>();
-    private static int width = 200;
-    private static int height = 50;
+    private int width = 200;
+    private int height = 50;
 
-    public ImageCaptchaServlet() {
+    static {
         COLORS.add(Color.BLUE);
         COLORS.add(Color.RED);
         COLORS.add(Color.GREEN);
@@ -47,18 +47,18 @@ public class ImageCaptchaServlet extends HttpServlet implements SingleThreadMode
     @Override
     public void init() throws ServletException {
         if (getInitParameter("captcha-height") != null) {
-            height = Integer.valueOf(getInitParameter("captcha-height"));
+            height = Integer.parseInt(getInitParameter("captcha-height"));
         }
 
         if (getInitParameter("captcha-width") != null) {
-            width = Integer.valueOf(getInitParameter("captcha-width"));
+            width = Integer.parseInt(getInitParameter("captcha-width"));
         }
     }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ColoredEdgesWordRenderer wordRenderer = new ColoredEdgesWordRenderer(COLORS, FONTS);
-        Captcha.Builder builder = new Captcha.Builder(width, height).gimp().addNoise().addBackground(new GradiatedBackgroundProducer());
+        Captcha.Builder builder = new Captcha.Builder(width, height).gimp().addNoise().addBackground(new GradiatedBackground());
         String answer = (String) req.getSession().getAttribute(CAPTCHA_ATTRIBUTE);
         if (answer != null) {
             builder.addText(new DefaultTextProducer(answer), wordRenderer);

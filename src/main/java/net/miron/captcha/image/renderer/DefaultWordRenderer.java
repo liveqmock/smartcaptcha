@@ -1,4 +1,4 @@
-package net.miron.captcha.text.renderer;
+package net.miron.captcha.image.renderer;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Default implementation of {@link WordRenderer}.
+ */
 public class DefaultWordRenderer implements WordRenderer {
 
     private static final Random RAND = new SecureRandom();
@@ -31,27 +34,22 @@ public class DefaultWordRenderer implements WordRenderer {
     private final List<Font> fonts = new ArrayList<>();
 
     /**
-     * Use the default color (black) and fonts (Arial and Courier).
+     * Creates a {@link DefaultWordRenderer} with default color (black) and fonts (Arial and Courier).
      */
     public DefaultWordRenderer() {
         this(DEFAULT_COLORS, DEFAULT_FONTS);
     }
 
     /**
-     * Build a <code>WordRenderer</code> using the given <code>Color</code>s and
-     * <code>Font</code>s.
+     * Creates a {@link DefaultWordRenderer} with specified colors and fonts.
+     * @param colors list of {@link java.awt.Color}.
+     * @param fonts list of {@link java.awt.Font}.
      */
     public DefaultWordRenderer(List<Color> colors, List<Font> fonts) {
         this.colors.addAll(colors);
         this.fonts.addAll(fonts);
     }
 
-    /**
-     * Render a word onto a BufferedImage.
-     *
-     * @param word  The word to be rendered.
-     * @param image The BufferedImage onto which the word will be painted.
-     */
     @Override
     public void render(final String word, BufferedImage image) {
         Graphics2D g = image.createGraphics();

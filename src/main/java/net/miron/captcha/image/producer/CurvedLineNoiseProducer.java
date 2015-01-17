@@ -1,4 +1,4 @@
-package net.miron.captcha.noise;
+package net.miron.captcha.image.producer;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -21,18 +21,23 @@ public class CurvedLineNoiseProducer implements NoiseProducer {
     private final Color color;
     private final float width;
 
+    /**
+     * Creates a {@link CurvedLineNoiseProducer} with default color and width.
+     */
     public CurvedLineNoiseProducer() {
         this(Color.BLACK, 3.0f);
     }
 
+    /**
+     * Creates a {@link CurvedLineNoiseProducer} with specified color and width.
+     * @param color color of line.
+     * @param width width of line.
+     */
     public CurvedLineNoiseProducer(Color color, float width) {
         this.color = color;
         this.width = width;
     }
 
-    /**
-     * {@inheritDoc} See class description.
-     */
     @Override
     public void makeNoise(BufferedImage image) {
         int imageWidth = image.getWidth();

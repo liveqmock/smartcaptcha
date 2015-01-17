@@ -10,6 +10,9 @@ import java.util.logging.Logger;
 
 import net.miron.captcha.audio.Sample;
 
+/**
+ * Utility class for operating with files.
+ */
 public final class FileUtil {
 
     private static final Logger LOG = Logger.getLogger(FileUtil.class.getName());
@@ -18,11 +21,10 @@ public final class FileUtil {
     }
 
     /**
-     * Get a file resource and return it as an InputStream. Intended primarily
+     * Gets a file resource and returns it as an InputStream. Intended primarily
      * to read in binary files which are contained in a jar.
-     *
      * @param filename name of file.
-     * @return An @{link InputStream} to the file.
+     * @return An {@link InputStream} to the file.
      */
     public static InputStream readResource(String filename) {
         InputStream jarIs = FileUtil.class.getResourceAsStream(filename);
@@ -47,6 +49,11 @@ public final class FileUtil {
         return new ByteArrayInputStream(buffer.toByteArray());
     }
 
+    /**
+     * Returns a audio sample by specified filename.
+     * @param filename name of file.
+     * @return see description.
+     */
     public static Sample readSample(String filename) {
         InputStream is = readResource(filename);
         return new Sample(is);

@@ -1,4 +1,4 @@
-package net.miron.captcha.backgrounds;
+package net.miron.captcha.image.background;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -12,23 +12,33 @@ import java.awt.image.BufferedImage;
  * Color values. If none are specified they default to light gray and white
  * respectively.
  */
-public class GradiatedBackgroundProducer implements BackgroundProducer {
+public class GradiatedBackground implements Background {
 
     private final Color fromColor;
     private final Color toColor;
 
-    public GradiatedBackgroundProducer() {
+    /**
+     * Creates a gradiated background with defaults colors: from dark gray to white.
+     */
+    public GradiatedBackground() {
         this(Color.DARK_GRAY, Color.WHITE);
     }
 
-    public GradiatedBackgroundProducer(Color from, Color to) {
+    /**
+     * Creates a gradiated background with specified <i>from</i> and <i>to</i> colors.
+     * @param from the instance of {@link java.awt.Color}.
+     * @param to the instance of {@link java.awt.Color}.
+     */
+    public GradiatedBackground(Color from, Color to) {
         fromColor = from;
         toColor = to;
     }
 
-    /**
-     * {@inheritDoc} See class description.
-     */
+    @Override
+    public BufferedImage addBackground(BufferedImage image) {
+        return getBackground(image.getWidth(), image.getHeight());
+    }
+
     @Override
     public BufferedImage getBackground(int width, int height) {
         // create an opaque image
@@ -51,13 +61,5 @@ public class GradiatedBackgroundProducer implements BackgroundProducer {
         g.dispose();
 
         return img;
-    }
-
-    /**
-     * {@inheritDoc} See class description.
-     */
-    @Override
-    public BufferedImage addBackground(BufferedImage image) {
-        return getBackground(image.getWidth(), image.getHeight());
     }
 }

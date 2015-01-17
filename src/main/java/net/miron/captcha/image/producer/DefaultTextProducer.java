@@ -1,4 +1,4 @@
-package net.miron.captcha.text.producer;
+package net.miron.captcha.image.producer;
 
 import java.util.Random;
 
@@ -15,18 +15,34 @@ public class DefaultTextProducer implements TextProducer {
 
     private final String text;
 
+    /**
+     * Creates a {@link DefaultTextProducer} with default length and random characters.
+     */
     public DefaultTextProducer() {
         text = generateText(DEFAULT_LENGTH, DEFAULT_CHARS);
     }
 
+    /**
+     * Creates a {@link DefaultTextProducer} with random characters and specified length.
+     * @param length length of text.
+     */
     public DefaultTextProducer(int length) {
         text = generateText(length, DEFAULT_CHARS);
     }
 
+    /**
+     * Creates a {@link DefaultTextProducer} with specified length and characters.
+     * @param length length of text.
+     * @param dictionary characters for text.
+     */
     public DefaultTextProducer(int length, char[] dictionary) {
         text = generateText(length, dictionary);
     }
 
+    /**
+     * Creates a {@link DefaultTextProducer} with specified text.
+     * @param text text.
+     */
     public DefaultTextProducer(String text) {
         this.text = text;
     }

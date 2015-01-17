@@ -1,4 +1,4 @@
-package net.miron.captcha.backgrounds;
+package net.miron.captcha.image.background;
 
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
@@ -7,19 +7,13 @@ import java.awt.image.BufferedImage;
 /**
  * Generates a transparent background.
  */
-public class TransparentBackgroundProducer implements BackgroundProducer {
+public class TransparentBackground implements Background {
 
-    /**
-     * {@inheritDoc} See class description.
-     */
     @Override
     public BufferedImage addBackground(BufferedImage image) {
         return getBackground(image.getWidth(), image.getHeight());
     }
 
-    /**
-     * {@inheritDoc} See class description.
-     */
     @Override
     public BufferedImage getBackground(int width, int height) {
         BufferedImage bg = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);

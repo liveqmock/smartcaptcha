@@ -8,8 +8,7 @@ import net.miron.captcha.audio.Sample;
 public interface VoiceProducer {
 
     /**
-     * Returns the instance of {@link net.miron.captcha.audio.Sample} for the given single character.
-     *
+     * Returns the audio sample for the given single character.
      * @param letter single character.
      * @return see description.
      */

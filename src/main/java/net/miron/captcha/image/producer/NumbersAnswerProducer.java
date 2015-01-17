@@ -1,4 +1,4 @@
-package net.miron.captcha.text.producer;
+package net.miron.captcha.image.producer;
 
 
 /**
@@ -11,16 +11,27 @@ public class NumbersAnswerProducer implements TextProducer {
 
     private final TextProducer txtProd;
 
+    /**
+     * Creates a {@link NumbersAnswerProducer} with default length.
+     */
     public NumbersAnswerProducer() {
         this(DEFAULT_LENGTH);
     }
 
-    public NumbersAnswerProducer(String answer) {
-        txtProd = new DefaultTextProducer(answer);
-    }
-
+    /**
+     * Creates a {@link NumbersAnswerProducer} with specified length.
+     * @param length length of text.
+     */
     public NumbersAnswerProducer(int length) {
         txtProd = new DefaultTextProducer(length, NUMBERS);
+    }
+
+    /**
+     * Creates a {@link NumbersAnswerProducer} with specified text.
+     * @param text text.
+     */
+    public NumbersAnswerProducer(String text) {
+        txtProd = new DefaultTextProducer(text);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package net.miron.captcha.renderer;
+package net.miron.captcha.image.renderer;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -12,18 +12,23 @@ public class FishEyeRenderer implements Renderer {
     private final Color hColor;
     private final Color vColor;
 
+    /**
+     * Creates a warped grid with default black colors.
+     */
     public FishEyeRenderer() {
         this(Color.BLACK, Color.BLACK);
     }
 
+    /**
+     * Creates a warped grid with specified colors.
+     * @param hColor color for horizontal lines.
+     * @param vColor color for vertical lines.
+     */
     public FishEyeRenderer(Color hColor, Color vColor) {
         this.hColor = hColor;
         this.vColor = vColor;
     }
 
-    /**
-     * {@inheritDoc} See class description.
-     */
     @Override
     public void gimp(BufferedImage image) {
         int height = image.getHeight();

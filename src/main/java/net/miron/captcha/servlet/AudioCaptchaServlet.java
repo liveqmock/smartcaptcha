@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.miron.captcha.audio.AudioCaptcha;
-import net.miron.captcha.text.producer.DefaultTextProducer;
+import net.miron.captcha.image.producer.DefaultTextProducer;
 import net.miron.captcha.util.CaptchaServletUtil;
 
 import static net.miron.captcha.util.CaptchaServletUtil.CAPTCHA_ATTRIBUTE;

@@ -1,4 +1,4 @@
-package net.miron.captcha;
+package net.miron.captcha.image;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -12,22 +12,21 @@ import java.util.Date;
 
 import javax.imageio.ImageIO;
 
-import net.miron.captcha.backgrounds.TransparentBackgroundProducer;
-import net.miron.captcha.renderer.FishEyeRenderer;
-import net.miron.captcha.renderer.Renderer;
-import net.miron.captcha.text.renderer.WordRenderer;
-import net.miron.captcha.backgrounds.BackgroundProducer;
-import net.miron.captcha.noise.CurvedLineNoiseProducer;
-import net.miron.captcha.noise.NoiseProducer;
-import net.miron.captcha.text.producer.DefaultTextProducer;
-import net.miron.captcha.text.producer.TextProducer;
-import net.miron.captcha.text.renderer.DefaultWordRenderer;
+import net.miron.captcha.image.background.TransparentBackground;
+import net.miron.captcha.image.renderer.FishEyeRenderer;
+import net.miron.captcha.image.renderer.Renderer;
+import net.miron.captcha.image.renderer.WordRenderer;
+import net.miron.captcha.image.background.Background;
+import net.miron.captcha.image.producer.CurvedLineNoiseProducer;
+import net.miron.captcha.image.producer.NoiseProducer;
+import net.miron.captcha.image.producer.DefaultTextProducer;
+import net.miron.captcha.image.producer.TextProducer;
+import net.miron.captcha.image.renderer.DefaultWordRenderer;
 
 /**
- * A builder for generating a CAPTCHA image/answer pair.
- * <p/>
+ * A builder for generating a captcha image/answer pair.
  * <p>
- * Example for generating a new CAPTCHA:
+ * Example for generating a new captcha:
  * </p>
  * <pre>Captcha nl.captcha = new Captcha.Builder(200, 50)
  * 	.addText()
@@ -42,7 +41,7 @@ import net.miron.captcha.text.renderer.DefaultWordRenderer;
  * 	.addNoise()
  * 	.addBackground()
  * 	.build();</pre>
- * <p>Adding multiple backgrounds has no affect; the last background added will simply be the
+ * <p>Adding multiple background has no affect; the last background added will simply be the
  * one that is eventually rendered.</p>
  */
 public final class Captcha implements Serializable {
@@ -51,10 +50,17 @@ public final class Captcha implements Serializable {
 
     private final Builder builder;
 
+    /**
+     * Creates a {@link Captcha} with specified instance of {@link Captcha.Builder}.
+     * @param builder builder for captcha.
+     */
     private Captcha(Builder builder) {
         this.builder = builder;
     }
 
+    /**
+     * Captcha class builder.
+     */
     public static class Builder implements Serializable {
 
         private static final long serialVersionUID = 1223993387863964106L;
@@ -65,42 +71,48 @@ public final class Captcha implements Serializable {
         private Date timeStamp;
         private boolean addBorder = false;
 
+        /**
+         * Creates a {@link Captcha.Builder} with specified width and height.
+         * @param width width of captcha.
+         * @param height height of captcha.
+         */
         public Builder(int width, int height) {
             img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         }
 
         /**
-         * Add a background using the default {@link TransparentBackgroundProducer}).
+         * Add a background using the default {@link TransparentBackground}.
          */
         public Builder addBackground() {
-            return addBackground(new TransparentBackgroundProducer());
+            return addBackground(new TransparentBackground());
         }
 
         /**
-         * Add a background using the given {@link BackgroundProducer}.
-         *
-         * @param bgProd the instance of {@link BackgroundProducer}.
+         * Add a background using the given {@link Background}.
+         * @param background the instance of {@link Background}.
          */
-        public Builder addBackground(BackgroundProducer bgProd) {
-            bg = bgProd.getBackground(img.getWidth(), img.getHeight());
+        public Builder addBackground(Background background) {
+            bg = background.getBackground(img.getWidth(), img.getHeight());
             return this;
         }
 
+        /**
+         * Add answer to the captcha with specified instance of {@link WordRenderer}.
+         * @param wordRenderer the instance of {@link WordRenderer}.
+         */
         public Builder addText(WordRenderer wordRenderer) {
             return addText(new DefaultTextProducer(), wordRenderer);
         }
 
         /**
-         * Generate the answer to the CAPTCHA using the {@link DefaultTextProducer}.
+         * Add answer to the captcha using the {@link DefaultTextProducer}.
          */
         public Builder addText() {
             return addText(new DefaultTextProducer());
         }
 
         /**
-         * Generate the answer to the CAPTCHA using the given
-         * {@link TextProducer}.
-         *
+         * ADd answer to the captcha using the given {@link TextProducer}.
          * @param txtProd the instance of {@link TextProducer}.
          */
         public Builder addText(TextProducer txtProd) {
@@ -108,11 +120,10 @@ public final class Captcha implements Serializable {
         }
 
         /**
-         * Generate the answer to the CAPTCHA using the given
+         * ADd answer to the captcha using the given
          * {@link TextProducer}, and render it to the image using the given
          * {@link WordRenderer}.
-         *
-         * @param txtProd   the instance of {@link TextProducer}.
+         * @param txtProd the instance of {@link TextProducer}.
          * @param wRenderer the instance of {@link WordRenderer}.
          */
         public Builder addText(TextProducer txtProd, WordRenderer wRenderer) {
@@ -130,25 +141,23 @@ public final class Captcha implements Serializable {
 
         /**
          * Add noise using the given {@link NoiseProducer}.
-         *
-         * @param nProd the instance of {@link NoiseProducer}.
+         * @param noise the instance of {@link NoiseProducer}.
          */
-        public Builder addNoise(NoiseProducer nProd) {
-            nProd.makeNoise(img);
+        public Builder addNoise(NoiseProducer noise) {
+            noise.makeNoise(img);
             return this;
         }
 
         /**
-         * Gimp the image using the default {@link net.miron.captcha.renderer.FishEyeRenderer}.
+         * Gimp the image using the default {@link FishEyeRenderer}.
          */
         public Builder gimp() {
             return gimp(new FishEyeRenderer());
         }
 
         /**
-         * Gimp the image using the given {@link net.miron.captcha.renderer.Renderer}.
-         *
-         * @param renderer the instance of {@link net.miron.captcha.renderer.Renderer}.
+         * Gimp the image using the given {@link Renderer}.
+         * @param renderer the instance of {@link Renderer}.
          */
         public Builder gimp(Renderer renderer) {
             renderer.gimp(img);
@@ -160,19 +169,17 @@ public final class Captcha implements Serializable {
          */
         public Builder addBorder() {
             addBorder = true;
-
             return this;
         }
 
         /**
-         * Build the CAPTCHA. This method should always be called, and should always
-         * be called last.
-         *
-         * @return The constructed CAPTCHA.
+         * Builds the captcha. This method should always be called,
+         * and should always be called last.
+         * @return The constructed captcha.
          */
         public Captcha build() {
             if (bg == null) {
-                bg = new TransparentBackgroundProducer().getBackground(img.getWidth(), img.getHeight());
+                bg = new TransparentBackground().getBackground(img.getWidth(), img.getHeight());
             }
 
             // Paint the main image over the background
@@ -210,18 +217,26 @@ public final class Captcha implements Serializable {
         }
     }
 
+    /**
+     * Returns true if specified answer if correct, otherwise false.
+     * @param answer answer for captcha.
+     * @return see description.
+     */
     public boolean isCorrect(String answer) {
         return answer.equals(builder.answer);
     }
 
+    /**
+     * Returns the answer for captcha.
+     * @return see description.
+     */
     public String getAnswer() {
         return builder.answer;
     }
 
     /**
-     * Get the CAPTCHA image, a PNG.
-     *
-     * @return A PNG CAPTCHA image.
+     * Get the PNG captcha image.
+     * @return see description.
      */
     public BufferedImage getImage() {
         return builder.img;

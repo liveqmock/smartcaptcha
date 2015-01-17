@@ -1,4 +1,4 @@
-package net.miron.captcha.audio.noise;
+package net.miron.captcha.audio.producer;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ public interface NoiseProducer {
     /**
      * Append the given <code>samples</code> to each other, then add random
      * noise to the result.
-     * @param target the list of {@link net.miron.captcha.audio.Sample}.
-     * @return
+     * @param target list of {@link net.miron.captcha.audio.Sample}.
+     * @return prepared instance of {@link net.miron.captcha.audio.Sample}.
      */
     public Sample addNoise(List<Sample> target);
 }
