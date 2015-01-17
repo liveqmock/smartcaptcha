@@ -3,6 +3,7 @@ SmartCaptcha
 
 ## What is it?
  SmartCaptcha is a open source Java library, which used for generation of image or/and audio captcha at the page.
+ Based on <a href="http://simplecaptcha.sourceforge.net/" target="_blank">SimpleCaptcha</a> 
  
 ## Requirements
 * Java 6 and later.
