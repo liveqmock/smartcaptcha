@@ -4,9 +4,26 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.miron</groupId>
+    <groupId>org.em.miron</groupId>
     <artifactId>smartcaptcha</artifactId>
     <version>1.0</version>
+
+    <name>Smart Captcha</name>
+    <description>A application used for generation of image or/and audio captcha at the page. Based on SimpleCaptcha</description>
+    <url>https://github.com/rustock0/smartcaptcha</url>
+
+    <developers>
+        <developer>
+            <name>Evgeny Mironenko</name>
+            <email>emironen0@gmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:rustock0/smartcaptcha.git</connection>
+        <developerConnection>scm:git:git@github.com:rustock0/smartcaptcha.git</developerConnection>
+        <url>git@github.com:rustock0/smartcaptcha.git</url>
+    </scm>
 
     <dependencies>
         <dependency>
@@ -26,6 +43,32 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -52,6 +95,8 @@
 
     <properties>
         <servlets.version>3.1.0</servlets.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
 </project>
