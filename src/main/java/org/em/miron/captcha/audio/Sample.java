@@ -42,7 +42,9 @@ public class Sample {
 
         try {
             audioInputStream = AudioSystem.getAudioInputStream(is);
-        } catch (UnsupportedAudioFileException | IOException e) {
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        } catch (UnsupportedAudioFileException e) {
             throw new IllegalStateException(e);
         }
 
@@ -84,7 +86,9 @@ public class Sample {
         double[] samples = new double[(int) getSampleCount()];
         try {
             getInterleavedSamples(0, getSampleCount(), samples);
-        } catch (IllegalArgumentException | IOException e) {
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, "Could not get interleaved samples: ", e);
+        } catch (IllegalArgumentException e) {
             LOG.log(Level.SEVERE, "Could not get interleaved samples: ", e);
         }
 

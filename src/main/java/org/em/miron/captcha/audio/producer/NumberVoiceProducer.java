@@ -21,7 +21,7 @@ public class NumberVoiceProducer implements VoiceProducer {
     private static final Map<Integer, String[]> DEFAULT_VOICES_MAP;
 
     static {
-        DEFAULT_VOICES_MAP = new HashMap<>();
+        DEFAULT_VOICES_MAP = new HashMap<Integer, String[]>();
         String[] filesForNum;
         StringBuilder sb;
 

@@ -19,8 +19,6 @@ import static org.em.miron.captcha.util.CaptchaServletUtil.CAPTCHA_ATTRIBUTE;
  */
 public class AudioCaptchaServlet extends HttpServlet implements SingleThreadModel {
 
-    private static final long serialVersionUID = 4690256047223360039L;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AudioCaptcha.Builder builder = new AudioCaptcha.Builder().addNoise();

@@ -27,10 +27,8 @@ import static org.em.miron.captcha.util.CaptchaServletUtil.CAPTCHA_ATTRIBUTE;
  */
 public class CaptchaServlet extends HttpServlet implements SingleThreadModel {
 
-    private static final long serialVersionUID = -818415138453710213L;
-
-    private static final List<Color> COLORS = new ArrayList<>();
-    private static final List<Font> FONTS = new ArrayList<>();
+    private static final List<Color> COLORS = new ArrayList<Color>();
+    private static final List<Font> FONTS = new ArrayList<Font>();
     private int width = 200;
     private int height = 50;
 

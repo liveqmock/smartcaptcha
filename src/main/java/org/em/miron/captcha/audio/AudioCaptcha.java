@@ -58,8 +58,8 @@ public final class AudioCaptcha {
          * Creates a {@link AudioCaptcha.Builder} with empty voice and noise lists.
          */
         public Builder() {
-            voiceProds = new ArrayList<>();
-            noiseProds = new ArrayList<>();
+            voiceProds = new ArrayList<VoiceProducer>();
+            noiseProds = new ArrayList<NoiseProducer>();
         }
 
         /**
@@ -133,7 +133,7 @@ public final class AudioCaptcha {
 
             // Make a List of Samples for each character
             VoiceProducer vProd;
-            List<Sample> samples = new ArrayList<>();
+            List<Sample> samples = new ArrayList<Sample>();
             Sample sample;
             for (char c : answerArray) {
                 // Create Sample for this character from one of the

@@ -26,8 +26,8 @@ public class ColoredEdgesWordRenderer implements WordRenderer {
 
     private static final Random RAND = new SecureRandom();
 
-    private static final List<Color> DEFAULT_COLORS = new ArrayList<>();
-    private static final List<Font> DEFAULT_FONTS = new ArrayList<>();
+    private static final List<Color> DEFAULT_COLORS = new ArrayList<Color>();
+    private static final List<Font> DEFAULT_FONTS = new ArrayList<Font>();
     private static final float DEFAULT_STROKE_WIDTH = 1f;
     // The text will be rendered 25%/5% of the image height/width from the X and Y axes
     private static final double YOFFSET = 0.25;
