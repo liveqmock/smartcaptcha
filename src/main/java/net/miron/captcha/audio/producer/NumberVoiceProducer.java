@@ -30,7 +30,7 @@ public class NumberVoiceProducer implements VoiceProducer {
         for (int i = 0; i < 10; i++) {
             filesForNum = new String[DEFAULT_VOICES.length];
             for (int j = 0; j < filesForNum.length; j++) {
-                sb = new StringBuilder("/sounds/en/numbers/");
+                sb = new StringBuilder("/META-INF/resources/smartcaptcha/sounds/en/numbers/");
                 sb.append(i);
                 sb.append("-");
                 sb.append(DEFAULT_VOICES[j]);
