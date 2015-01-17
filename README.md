@@ -36,10 +36,10 @@ To include captcha into your page you should to define servlet(s) and filter to 
 
     <filter-mapping>
         <filter-name>RefreshCaptchaFilter</filter-name>
-        <url-pattern>/captcha.xhtml</url-pattern>
+        <url-pattern>/captcha.html</url-pattern>
     </filter-mapping>
   ```
-Replace "/captcha.xhtml" by path to your page with captcha.
+Replace "/captcha.html" by path to your page with captcha.
 
 Add 
 ``` html
