@@ -48,10 +48,9 @@ Add
 ```
 to your page.
 "captcha" is path to your ImageCaptchaServlet and "audioCaptcha" is path to your AudioCaptchaServlet. 
-In resources of library you will find audio.js, which defines playing of audio at the page. 
+In resources of library you will find audio.js, which play the audio at the page. 
 If you want to use your own solution, just add "audioCaptcha" to src of HTML object, embed or audio.
-The order to get the answer for captcha you need get session attribute with name "CAPTCHA" or you can use contant 
-CaptchaServletUtil.CAPTCHA_ATTRIBUTE, which already contains this name
+The order to get the answer for captcha you need get session attribute with name "CAPTCHA" or you can use contant CaptchaServletUtil.CAPTCHA_ATTRIBUTE, which already contains this name
 ``` java
 String answer = request.getSession().getAttribute(CaptchaServletUtil.CAPTCHA_ATTRIBUTE);
 ``` 
