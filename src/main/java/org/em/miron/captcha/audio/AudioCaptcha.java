@@ -29,6 +29,9 @@ import org.em.miron.captcha.util.MixerUtil;
  * Note that the <code>build()</code> method must always be called last. Other
  * methods are optional.
  * </p>
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public final class AudioCaptcha {
 

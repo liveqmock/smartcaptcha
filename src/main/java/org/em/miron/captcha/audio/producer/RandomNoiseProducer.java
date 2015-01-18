@@ -19,6 +19,9 @@ import org.em.miron.captcha.util.FileUtil;
  * String myFiles = { &quot;/mysounds/noise1.wav&quot;, &quot;/mysounds/noise2.wav&quot; };
  * NoiseProducer myNp = new RandomNoiseProducer(myFiles);
  * </pre>
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public class RandomNoiseProducer implements NoiseProducer {
 

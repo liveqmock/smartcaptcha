@@ -8,6 +8,8 @@ import static org.em.miron.captcha.util.CaptchaServletUtil.CAPTCHA_ATTRIBUTE;
 
 /**
  * Removes the captcha attribute from session, thereby resets captcha.
+ *
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public class RefreshCaptchaFilter implements Filter {
 

@@ -21,6 +21,9 @@ import java.util.Random;
 /**
  * Implementation of {@link WordRenderer}.
  * A word with colored edges and adjustable stroke width.
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public class ColoredEdgesWordRenderer implements WordRenderer {
 

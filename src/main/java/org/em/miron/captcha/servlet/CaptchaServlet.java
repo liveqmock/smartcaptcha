@@ -24,6 +24,8 @@ import static org.em.miron.captcha.util.CaptchaServletUtil.CAPTCHA_ATTRIBUTE;
 
 /**
  * Generates a new {@link Captcha} and writes the image to the response.
+ *
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public class CaptchaServlet extends HttpServlet implements SingleThreadModel {
 

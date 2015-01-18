@@ -6,6 +6,9 @@ import java.awt.image.BufferedImage;
 
 /**
  * Overlays a warped grid to the image.
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public class FishEyeRenderer implements Renderer {
 

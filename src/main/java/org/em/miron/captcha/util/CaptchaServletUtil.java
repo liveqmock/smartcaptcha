@@ -16,6 +16,9 @@ import org.em.miron.captcha.audio.Sample;
 
 /**
  * Helper class for operating with {@link javax.servlet.http.HttpServletResponse} and image/audio resources.
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public final class CaptchaServletUtil {
 

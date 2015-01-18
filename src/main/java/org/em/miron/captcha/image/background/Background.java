@@ -4,6 +4,9 @@ import java.awt.image.BufferedImage;
 
 /**
  * Base interface for background.
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public interface Background {
 

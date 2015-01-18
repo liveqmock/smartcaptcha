@@ -3,6 +3,9 @@ package org.em.miron.captcha.image.producer;
 
 /**
  * TextProducer implementation that will return a series of numbers.
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public class NumbersAnswerProducer implements TextProducer {
 

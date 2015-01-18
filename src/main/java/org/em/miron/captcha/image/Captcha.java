@@ -43,6 +43,9 @@ import org.em.miron.captcha.image.renderer.DefaultWordRenderer;
  * 	.build();</pre>
  * <p>Adding multiple background has no affect; the last background added will simply be the
  * one that is eventually rendered.</p>
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public final class Captcha {
 

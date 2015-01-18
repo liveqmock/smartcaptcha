@@ -16,6 +16,8 @@ import static org.em.miron.captcha.util.CaptchaServletUtil.CAPTCHA_ATTRIBUTE;
 
 /**
  * Generates a new {@link AudioCaptcha} and writes the audio to the response.
+ *
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public class AudioCaptchaServlet extends HttpServlet implements SingleThreadModel {
 

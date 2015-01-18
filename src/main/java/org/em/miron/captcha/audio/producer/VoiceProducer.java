@@ -4,6 +4,9 @@ import org.em.miron.captcha.audio.Sample;
 
 /**
  * Generates a vocalization for a single character.
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public interface VoiceProducer {
 

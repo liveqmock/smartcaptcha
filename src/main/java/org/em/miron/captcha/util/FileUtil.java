@@ -12,6 +12,9 @@ import org.em.miron.captcha.audio.Sample;
 
 /**
  * Utility class for operating with files.
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public final class FileUtil {
 

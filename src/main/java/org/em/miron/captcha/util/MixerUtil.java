@@ -11,6 +11,9 @@ import javax.sound.sampled.AudioInputStream;
 
 /**
  * Helper class for operating with {@link org.em.miron.captcha.audio.Sample}.
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public final class MixerUtil {
 

@@ -11,6 +11,9 @@ import java.awt.image.BufferedImage;
  * Creates a gradiated background with the given <i>from</i> and <i>to</i>
  * Color values. If none are specified they default to light gray and white
  * respectively.
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public class GradiatedBackground extends AbstractBackground {
 

@@ -21,6 +21,9 @@ import javax.sound.sampled.*;
  * Data files in other formats will cause an
  * <code>IllegalArgumentException</code> to be thrown.
  * </p>
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public class Sample {
 

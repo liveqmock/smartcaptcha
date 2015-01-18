@@ -13,6 +13,9 @@ import org.em.miron.captcha.util.FileUtil;
  * The default voices are located in the jar in the <code>sounds/en/numbers</code> directory,
  * and have filenames with a format of <i>num</i>-<i>voice</i>.wav, e.g.:
  * <code>sounds/en/numbers/1-alex.wav</code>.
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public class NumberVoiceProducer implements VoiceProducer {
 

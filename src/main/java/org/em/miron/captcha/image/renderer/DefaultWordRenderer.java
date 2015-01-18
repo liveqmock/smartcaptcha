@@ -14,6 +14,9 @@ import java.util.Random;
 
 /**
  * Default implementation of {@link WordRenderer}.
+ *
+ * @author <a href="mailto:james.childers@gmail.com">James Childers</a>
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public class DefaultWordRenderer implements WordRenderer {
 

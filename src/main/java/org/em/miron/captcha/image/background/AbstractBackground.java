@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 
 /**
  * Abstract implementation of {@link Background}.
+ *
+ * @author <a href="mailto:emironen0@gmail.com">Evgeny Mironenko</a>
  */
 public abstract class AbstractBackground implements Background {
 
