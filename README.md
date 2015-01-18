@@ -13,7 +13,7 @@ SmartCaptcha
 To include captcha into your page you should to define servlet(s) and filter to your web.xml
   ``` xml
    <servlet>
-        <servlet-name>ImageCaptchaServlet</servlet-name>
+        <servlet-name>CaptchaServlet</servlet-name>
         <servlet-class>org.em.miron.captcha.servlet.CaptchaServlet</servlet-class>
     </servlet>
     <servlet>
@@ -26,7 +26,7 @@ To include captcha into your page you should to define servlet(s) and filter to 
         <url-pattern>/audioCaptcha</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ImageCaptchaServlet</servlet-name>
+        <servlet-name>CaptchaServlet</servlet-name>
         <url-pattern>/captcha</url-pattern>
     </servlet-mapping>
 
@@ -48,7 +48,7 @@ Add
     <input type="button" onclick="playSound('audioCaptcha')" value="Play"/>
 ```
 to your page.
-"captcha" is path to your ImageCaptchaServlet and "audioCaptcha" is path to your AudioCaptchaServlet. 
+"captcha" is path to your CaptchaServlet and "audioCaptcha" is path to your AudioCaptchaServlet. 
 In resources of library you will find audio.js, which play the audio at the page. 
 If you want to use your own solution, just add "audioCaptcha" to src of HTML object, embed or audio.
 The order to get the answer for captcha you need get session attribute with name "CAPTCHA" or you can use constant CaptchaServletUtil.CAPTCHA_ATTRIBUTE, which already contains this name:
