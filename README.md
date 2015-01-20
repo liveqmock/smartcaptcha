@@ -14,11 +14,11 @@ To include captcha into your page you should to define servlet(s) and filter to 
   ``` xml
    <servlet>
         <servlet-name>CaptchaServlet</servlet-name>
-        <servlet-class>org.em.miron.captcha.servlet.CaptchaServlet</servlet-class>
+        <servlet-class>ml.miron.captcha.servlet.CaptchaServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AudioCaptchaServlet</servlet-name>
-        <servlet-class>org.em.miron.captcha.servlet.AudioCaptchaServlet</servlet-class>
+        <servlet-class>ml.miron.captcha.servlet.AudioCaptchaServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -32,7 +32,7 @@ To include captcha into your page you should to define servlet(s) and filter to 
 
     <filter>
         <filter-name>RefreshCaptchaFilter</filter-name>
-        <filter-class>org.em.miron.captcha.servlet.RefreshCaptchaFilter</filter-class>
+        <filter-class>ml.miron.captcha.servlet.RefreshCaptchaFilter</filter-class>
     </filter>
 
     <filter-mapping>
