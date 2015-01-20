@@ -1,1 +1,1 @@
-mvn release:clean release:prepare release:perform
+mvn versions:set -DnewVersion=1.0 clean deploy versions:revert
