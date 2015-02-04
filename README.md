@@ -84,7 +84,7 @@ Also you can specify your own voice fragments. Just add path
 ```
 to your AudioCaptchaServlet. 
 
-## Restriction
+## Restrictions
 * Don't use GET request to check the answer. Because of included RefreshCaptchaFilter we clean a previous 
 value from session attribute. GET request serves for this purpose.
 * At the current moment only audio with digits available. Thus, the fragments inside your own directory must have a strictly defined names: 0.wav, 1.wav, 2.wav, ..., 9.wav. You can override implementation of AudioCaptchaServlet to avoid this restriction.
