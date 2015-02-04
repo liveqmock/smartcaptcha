@@ -4,12 +4,6 @@ import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.Date;
-
-import javax.imageio.ImageIO;
 
 import ml.miron.captcha.image.background.Background;
 import ml.miron.captcha.image.producer.DefaultTextProducer;
@@ -64,9 +58,8 @@ public final class Captcha {
     public static class Builder {
 
         private String answer = "";
-        private BufferedImage img;
-        private BufferedImage bg;
-        private Date timeStamp;
+        private BufferedImage image;
+        private BufferedImage background;
         private boolean addBorder = false;
 
         /**
@@ -75,7 +68,7 @@ public final class Captcha {
          * @param height height of captcha.
          */
         public Builder(int width, int height) {
-            img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+            image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         }
 
         /**
@@ -92,7 +85,7 @@ public final class Captcha {
          * @return the current instance of {@link Captcha.Builder}.
          */
         public Builder addBackground(Background background) {
-            bg = background.getBackground(img.getWidth(), img.getHeight());
+            this.background = background.getBackground(image.getWidth(), image.getHeight());
             return this;
         }
 
@@ -132,7 +125,7 @@ public final class Captcha {
          */
         public Builder addText(TextProducer txtProd, WordRenderer wRenderer) {
             answer += txtProd.getText();
-            wRenderer.render(answer, img);
+            wRenderer.render(answer, image);
             return this;
         }
 
@@ -150,7 +143,7 @@ public final class Captcha {
          * @return the current instance of {@link Captcha.Builder}.
          */
         public Builder addNoise(NoiseProducer noise) {
-            noise.makeNoise(img);
+            noise.makeNoise(image);
             return this;
         }
 
@@ -168,7 +161,7 @@ public final class Captcha {
          * @return the current instance of {@link Captcha.Builder}.
          */
         public Builder gimp(Renderer renderer) {
-            renderer.gimp(img);
+            renderer.gimp(image);
             return this;
         }
 
@@ -187,18 +180,18 @@ public final class Captcha {
          * @return The constructed captcha.
          */
         public Captcha build() {
-            if (bg == null) {
-                bg = new TransparentBackground().getBackground(img.getWidth(), img.getHeight());
+            if (background == null) {
+                background = new TransparentBackground().getBackground(image.getWidth(), image.getHeight());
             }
 
             // Paint the main image over the background
-            Graphics2D g = bg.createGraphics();
+            Graphics2D g = background.createGraphics();
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-            g.drawImage(img, null, null);
+            g.drawImage(image, null, null);
 
             if (addBorder) {
-                int width = img.getWidth();
-                int height = img.getHeight();
+                int width = image.getWidth();
+                int height = image.getHeight();
 
                 g.setColor(Color.BLACK);
                 g.drawLine(0, 0, 0, width);
@@ -207,22 +200,9 @@ public final class Captcha {
                 g.drawLine(width - 1, height - 1, width - 1, 0);
             }
 
-            img = bg;
-            timeStamp = new Date();
+            image = background;
 
             return new Captcha(this);
-        }
-
-        private void writeObject(ObjectOutputStream out) throws IOException {
-            out.writeObject(answer);
-            out.writeObject(timeStamp);
-            ImageIO.write(img, "png", ImageIO.createImageOutputStream(out));
-        }
-
-        private void readObject(ObjectInputStream in ) throws IOException, ClassNotFoundException {
-            answer = (String) in .readObject();
-            timeStamp = (Date) in .readObject();
-            img = ImageIO.read(ImageIO.createImageInputStream( in ));
         }
     }
 
@@ -248,6 +228,6 @@ public final class Captcha {
      * @return see description.
      */
     public BufferedImage getImage() {
-        return builder.img;
+        return builder.image;
     }
 }

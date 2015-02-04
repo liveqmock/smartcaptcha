@@ -55,8 +55,8 @@ public class NumberVoiceProducer implements VoiceProducer {
      * Creates a {@link NumberVoiceProducer} for the given <code>voices</code>.
      * Conceptually the map must look like the following:
      * <pre>
-     * {1: ["/my_sounds/1-quiet.wav", "/my_sounds/1-loud.wav"],
-     *  2: ["/my_sounds/2-quiet.wav", "/my_sounds/2-loud.wav"]}
+     *  1: ["/my_sounds/1-quiet.wav", "/my_sounds/1-loud.wav"],
+     *  2: ["/my_sounds/2-quiet.wav", "/my_sounds/2-loud.wav"]
      * </pre>
      *
      * @param voices a map of numbers to their corresponding filenames.
