@@ -32,16 +32,6 @@ public class CaptchaServlet extends HttpServlet implements SingleThreadModel {
     private int width = 200;
     private int height = 50;
 
-    static {
-        COLORS.add(Color.BLUE);
-        COLORS.add(Color.RED);
-        COLORS.add(Color.GREEN);
-
-        FONTS.add(new Font("Geneva", Font.ITALIC, 48));
-        FONTS.add(new Font("Courier", Font.BOLD, 48));
-        FONTS.add(new Font("Arial", Font.BOLD, 48));
-    }
-
     @Override
     public void init() throws ServletException {
         if (getInitParameter("captcha-height") != null) {
@@ -51,6 +41,14 @@ public class CaptchaServlet extends HttpServlet implements SingleThreadModel {
         if (getInitParameter("captcha-width") != null) {
             width = Integer.parseInt(getInitParameter("captcha-width"));
         }
+
+        COLORS.add(Color.BLUE);
+        COLORS.add(Color.RED);
+        COLORS.add(Color.GREEN);
+
+        FONTS.add(new Font("Geneva", Font.ITALIC, height));
+        FONTS.add(new Font("Courier", Font.BOLD, height));
+        FONTS.add(new Font("Arial", Font.BOLD, height));
     }
 
     @Override
