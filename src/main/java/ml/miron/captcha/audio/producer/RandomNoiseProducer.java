@@ -27,9 +27,9 @@ public class RandomNoiseProducer implements NoiseProducer {
 
     private static final Random RAND = new SecureRandom();
     private static final String[] DEFAULT_NOISES = {
-            "/META-INF/resources/smartcaptcha/sounds/sounds/noises/radio_tuning.wav",
-            "/META-INF/resources/smartcaptcha/sounds/sounds/noises/restaurant.wav",
-            "/META-INF/resources/smartcaptcha/sounds/sounds/noises/swimming.wav",};
+            "/META-INF/resources/smartcaptcha/sounds/noises/radio_tuning.wav",
+            "/META-INF/resources/smartcaptcha/sounds/noises/restaurant.wav",
+            "/META-INF/resources/smartcaptcha/sounds/noises/swimming.wav",};
 
     private final String[] noiseFiles;
 
