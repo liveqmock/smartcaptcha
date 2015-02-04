@@ -9,6 +9,11 @@ SmartCaptcha
 * Java 6 and later.
 * Servlet Container or Application server with Servlets 2.4 and later.
 
+## Tested on
+* Internet Explorer 8 and later.
+* Mozilla Firefox
+* Google Chrome
+
 ## How to 
 To include captcha into your page you should to define servlet(s) and filter to your web.xml
   ``` xml
@@ -55,6 +60,31 @@ The order to get the answer for captcha you need get session attribute with name
 ``` java
 String answer = request.getSession().getAttribute(CaptchaServletUtil.CAPTCHA_ATTRIBUTE);
 ``` 
+
+## Configuration
+You can set your own size of captcha image. The order to do this just add 
+``` xml
+    <init-param>
+        <param-name>captcha-width</param-name>
+        <param-value>400</param-value>
+    </init-param>
+    <init-param>
+        <param-name>captcha-height</param-name>
+        <param-value>100</param-value>
+    </init-param>
+```
+to your CaptchaServlet. The default values is 200 and 50 respectively.
+
+Also you can specify your own voice fragments. Just add path 
+``` xml
+    <init-param>
+        <param-name>audio-path</param-name>
+        <param-value>/META-INF/sounds</param-value>
+    </init-param>
+```
+to your AudioCaptchaServlet. 
+
 ## Restriction
-Don't use GET request to check the answer. Because of included RefreshCaptchaFilter we clean a previous 
+* Don't use GET request to check the answer. Because of included RefreshCaptchaFilter we clean a previous 
 value from session attribute. GET request serves for this purpose.
+* At the current moment only audio with digits available. Thus, the fragments inside your own directory must have a strictly defined names: 0.wav, 1.wav, 2.wav, ..., 9.wav. You can override implementation of AudioCaptchaServlet to avoid this restriction.
