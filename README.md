@@ -10,7 +10,7 @@ SmartCaptcha
 * Servlet Container or Application server with Servlets 2.4 and later.
 
 ## Tested on
-* Internet Explorer 8 and later.
+* Internet Explorer 8 and later
 * Mozilla Firefox
 * Google Chrome
 
