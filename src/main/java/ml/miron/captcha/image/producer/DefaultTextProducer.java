@@ -58,7 +58,7 @@ public class DefaultTextProducer implements TextProducer {
     private String generateText(int length, char[] dictionary) {
         String txt = "";
         for (int i = 0; i < length; i++) {
-            txt += dictionary[RANDOM.nextInt(DEFAULT_LENGTH)];
+            txt += dictionary[RANDOM.nextInt(dictionary.length)];
         }
         return txt;
     }
